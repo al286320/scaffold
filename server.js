@@ -10,7 +10,7 @@ const webpackConfig = require('./webpack.config.js');
 const copiler = webpack(webpackConfig); //Copilamos el archivo de configiracion webpack
 
 //Indicamos ruta de archivos estaticos
-app.use(express.static(__dirname + 'public'));
+app.use(express.static('public'));
 
 //Configuramos webpack middleware para que detecte los cambios automaticamente y recopile
 app.use(webpackDevMiddleware(copiler,{
@@ -22,18 +22,14 @@ app.use(webpackDevMiddleware(copiler,{
 	},
 	historyApiFallBack: true
 }));
-
 app.use(webpackHotMiddleware(copiler,{
 	log: console.log
 }));
 
 //Routes
-app.get("/", () =>{
-	console.log('Hello world');
-});
 
 //Lanzamos el servidor en el puerto 3000
-app.listen(3000, () =>{
-	console.log('Server up');
+const server = app.listen(3000, () => {
+		console.log('Servidor Escuchando en el puero 3000');
 });
 

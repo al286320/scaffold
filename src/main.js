@@ -1,16 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 import ReactDOM from 'react-dom';
 
-class myMain extends Component{
-	constructor(){
-		super();
-	}
+class Main extends Component{
 
 	render(){
 		return(
-			<div> Hello from react </div>
+			<div> Funciona 11111 </div>
 			);
 	}
+
 }
 
-ReactDOM.render(<myMain />, document.getElementById('myApp'));
+ReactDOM.render(<Main />, document.getElementById('myApp'));
