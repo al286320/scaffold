@@ -9,8 +9,25 @@ const webpack = require('webpack');
 const webpackConfig = require('./webpack.config.js');
 const copiler = webpack(webpackConfig); //Copilamos el archivo de configiracion webpack
 
+//Base de datos
+const db = require('./connection.js');
+
+//Sesiones y cookies
+const session = require('express-session');
+
+//Importamos los routings
+const personaRouter = reuire('./routes/routePersona');
+
 //Indicamos ruta de archivos estaticos
-app.use(express.static('public'));
+app.use(express.static('public')); //Ruta relativa
+//app.use('/static', express.static(__dirname + '/public')); // Ruta absoluta
+
+//Configuramos las sesiones y las cookies
+app.use(session({
+	secret: '9038459askdjnf84383niosadh8w',
+	resave: false,
+	saveUninitialized: true 
+}));
 
 //Configuramos webpack middleware para que detecte los cambios automaticamente y recopile
 app.use(webpackDevMiddleware(copiler,{
@@ -27,6 +44,7 @@ app.use(webpackHotMiddleware(copiler,{
 }));
 
 //Routes
+app.use('/persona', personaRouter);
 
 //Lanzamos el servidor en el puerto 3000
 const server = app.listen(3000, () => {
